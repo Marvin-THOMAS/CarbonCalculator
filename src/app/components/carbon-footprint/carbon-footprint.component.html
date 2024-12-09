@@ -1,3 +1,29 @@
-<p>carbon-footprint works!</p>
+
+<div>Nombre de km parcourus : <span [ngClass]="distanceKm> 500 ? 'haute-distance' : (distanceKm<100 ? 'basse-distance' : '')">{{distanceKm}} Km</span>
+  <button (click)="ajouter100KM()">Ajouter 100km</button>
+</div>
+
+
+<div>Consomation au 100km : <span [ngClass]="consommationPour100Km > 7 ? 'red' : (consommationPour100Km < 4 ? 'green' : '')">{{consommationPour100Km}} L/100</span></div>
+
+<p>Consomation totale : {{consomationTotale}}  Litres</p>
+
+@if (consommationPour100Km>7){
+<div>'Attention votre consomation est élevée'</div>
+}
+
+@if (consommationPour100Km<4){
+  <div>'Félicitations, votre consommation est faible'</div>
+}
+
+<br>
+
+
+@for (voyage of voyages; track $index) {
+  <li>{{ voyage[$index] }}
+  </li>
+}
+
+
 <app-carbon-footprint-form></app-carbon-footprint-form>
 <app-carbon-footprint-result></app-carbon-footprint-result>
