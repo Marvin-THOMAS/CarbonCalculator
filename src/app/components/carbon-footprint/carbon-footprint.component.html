@@ -6,23 +6,35 @@
 
 <div>Consomation au 100km : <span [ngClass]="consommationPour100Km > 7 ? 'red' : (consommationPour100Km < 4 ? 'green' : '')">{{consommationPour100Km}} L/100</span></div>
 
-<p>Consomation totale : {{consomationTotale}}  Litres</p>
+<p>Consomation totale : {{consomationTotale | number : '1.2-2'}}  Litres</p>
 
-@if (consommationPour100Km>7){
+@if (consommationPour100Km> maxConsumtion){
 <div>'Attention votre consomation est élevée'</div>
 }
 
-@if (consommationPour100Km<4){
+@if (consommationPour100Km<minConsumption){
   <div>'Félicitations, votre consommation est faible'</div>
 }
 
 <br>
 
+<h2>Liste des voyages</h2>
+<table>
+  <thead>
+  <tr>
+    <th>Distance</th>
+    <th>Consommation pour 100 kms</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let voyage of voyages">
+    <td>{{ voyage.distanceKm }} km</td>
+    <td>{{ voyage.consommationPour100Km }} L</td>
+  </tr>
+  </tbody>
+</table>
+<button (click)="addVoyage()">Générer voyage</button>
 
-@for (voyage of voyages; track $index) {
-  <li>{{ voyage[$index] }}
-  </li>
-}
 
 
 <app-carbon-footprint-form></app-carbon-footprint-form>
